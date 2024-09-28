@@ -31,7 +31,7 @@ def bfs(x,y,k):
                 visited[nx][ny] = True
 
 
-result = 1
+result = 1 # 이거 0으로 초기화해놔서 문제였던거임...ㅋ
 for k in range(1,maximum):
     count = 0
     visited = []
@@ -49,4 +49,9 @@ for k in range(1,maximum):
         result = count
 
 print(result)
+
+# 2
+# 1 1
+# 1 1
+# 이 경우일 때를 생각 못했네....!!!!!!!!!
 
