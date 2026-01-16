@@ -2,36 +2,41 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
+    static String N;
+    static int[] arr;
+
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String s = br.readLine();
-
-        int[] arr = new int[10];
-        for (int i = 0; i < s.length(); i++) {
-            int num = s.charAt(i) - '0';
-            arr[num]++;
-        }
-
-        int sum = arr[6] + arr[9];
-        if ((sum % 2) == 0) {
-            sum = sum / 2;
-        } else {
-            sum = sum / 2 + 1;
-        }
-
-        int maximum = 0;
-        for (int i = 0; i < 10; i++) {
-            if (i != 6 && i != 9 && maximum < arr[i]) {
-                maximum = arr[i];
-            } else if (maximum < sum) {
-                maximum = sum;
+        N = br.readLine();
+        arr = new int[9];
+        char[] sArr = N.toCharArray();
+        for(int i=0; i<sArr.length; i++){
+            int num = Integer.parseInt(String.valueOf(sArr[i]));
+            if(num==9){
+                arr[6] ++;
+            }else{
+                arr[num] ++;
             }
         }
+        if(arr[6]%2 ==0){
+            arr[6] = arr[6]/2;
+        }else{
+            arr[6] = arr[6]/2 + 1;
+        }
 
-        System.out.println(maximum);
+        int maxi=Integer.MIN_VALUE;
+        for(int i=0; i<9; i++){
+            if(maxi < arr[i]){
+                maxi = arr[i];
+            }
+        }
+        System.out.println(maxi);
 
     }
+
 }
