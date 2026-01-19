@@ -1,38 +1,41 @@
-import java.util.Scanner;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        int N = sc.nextInt();
-        int S = sc.nextInt();
+    static int[] arr;
 
-        int[] arr = new int[N];
-        for (int i = 0; i < N; i++) {
-            arr[i] = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s = br.readLine().split(" ");
+        int N = Integer.parseInt(s[0]);
+        int S = Integer.parseInt(s[1]);
+
+        arr = new int[N+1];
+        s = br.readLine().split(" ");
+        for(int i=0; i<N; i++){
+            arr[i] = Integer.parseInt(s[i]);
         }
 
-        int j = 0; //두번째 포인터
-        int sum = arr[0];
-        int distance = 0;
-        int min = 100001;
+        int answer = Integer.MAX_VALUE;
+        int left = 0;
+        int right = 0;
+        int sum = 0;
 
-        for (int i = 0; i < N; i++) {
-            while (sum < S && j < N - 1) {
-                sum += arr[++j];
-            }
+        while (left <= N && right <= N) {
             if (sum >= S) {
-                distance = j - i + 1;
-                if (distance < min)
-                    min = distance;
+                answer = Math.min(answer, right - left);
+                sum -= arr[left++];
+            } else if (sum < S) {
+                sum += arr[right++];
             }
-            sum -= arr[i];
         }
-        if (min == 100001) {
-            System.out.println(0);
-            return;
-        }
+        System.out.println(answer==Integer.MAX_VALUE ? 0 : answer);
 
-        System.out.println(min);
     }
 }
